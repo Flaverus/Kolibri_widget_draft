@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Graphical Example</title>
+  <link rel="shortcut icon" type="image/png" href="../../../img/logo/logo-60x54.png"/>
+</head>
+<style>
+    svg {
+        margin-inline:  auto;
+        max-width:      90vmin;
+        aspect-ratio:   1 / 1;
+    }
+    svg * {
+        stroke:       rgba(87, 87, 165, 0.84);
+        stroke-width: 1px;
+    }
+    svg *:nth-child(4n+1) {
+        stroke: rgba(255, 98, 0, 0.84);
+    }
+    svg *:nth-child(4n+2) {
+        stroke:       rgba(162, 87, 165, 0.84);
+    }
+    svg *:nth-child(4n+3) {
+        stroke: rgba(255, 0, 204, 0.82);
+    }
+</style>
+<body>
+<header>
+  <h2>Simple SVG Graphics: Stairs</h2>
+</header>
+
+<div id="out">
+</div>
+
+<script type="module">
+    import { forever }   from "../../kolibri/sequence/util/helpers.js";
+    import { Sequence }  from "../../kolibri/sequence/constructors/sequence/Sequence.js";
+    import { dom }       from "../../kolibri/util/dom.js";
+    import { Seq }       from "../../kolibri/sequence/constructors/seq/seq.js";
+
+    const svgWidth = 500;
+    const [svg] = dom(`<svg id="svg" viewBox="${-svgWidth/2} ${-svgWidth/2} ${svgWidth} ${svgWidth}" > </svg> `);
+    document.getElementById("out").append(svg);
+
+    const trail = [         /* the last four endpoints ofter each turn */
+        [  9.5, -9.5],
+        [ 10  , 10  ],
+        [-10  , 10  ],
+        [-10  ,-10  ],
+    ];
+    const nextAfter = ([ [firstX, firstY],  second, third,  [lastX, lastY] ]) => // pure
+     [
+         second,
+         third,
+         [lastX, lastY],
+        [ firstX + (firstX - lastX) * 0.05,
+          firstY + (firstY - lastY) * 0.05]
+    ];
+
+    const lineFor = ([_f, _s, [x1, y1], [x2, y2] ]) =>                          // pure
+        `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"></line>`;
+
+    const allTrails  = Sequence(trail, forever, nextAfter);                     // pure, lazy
+    const renderLine = line => svg.innerHTML += line;                           // impure side effect
+    const waitThenOk = ms   => ok => setTimeout(ok, ms);                        // impure async
+    const callThenOk = f    => ok => ok(f());                                   // ready for promise ctor
+
+    const lazyLines = allTrails
+        .map( lineFor )
+        .map( line => () => renderLine(line))               // map to a sequence of _functions_ that can be called as f()
+        .map( callThenOk )                                  // make each function Promise-ready
+        .and( f => Seq(f, waitThenOk(50)))                  // intersperse monadically FTW
+    ;
+    lazyLines
+        .take(255 * 2)                                      // late "pruning" thanks to laziness
+        .reduce$( (acc, cur) => acc.then(() => new Promise(cur)), Promise.resolve(undefined));
+
+
+</script>
+</body>
+</html>
