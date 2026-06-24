@@ -8,7 +8,7 @@ import { id }         from "./stdlib.js";
 export { Attribute, QualifiedAttribute,
          presentationModelFromAttributeNames,
          valueOf, readQualifierValue,
-         VALID, VALUE, EDITABLE, LABEL, NAME, TOOLTIP, TYPE }
+         VALID, VALUE, EDITABLE, LABEL, NAME, TOOLTIP, TYPE, PROPERTY, MEDIA_QUERY }
 
 /**
  * @typedef { BasicObservableTypeString | ExtendedObservableTypeString } ObservableTypeString
@@ -28,6 +28,8 @@ export { Attribute, QualifiedAttribute,
 /** @type BasicObservableTypeString */ const NAME            = "name";
 /** @type BasicObservableTypeString */ const TYPE            = "type"; // HTML input types: text, number, checkbox, etc.
 /** @type BasicObservableTypeString */ const TOOLTIP         = "tooltip";
+/** @type BasicObservableTypeString */ const PROPERTY        = "property";
+/** @type BasicObservableTypeString */ const MEDIA_QUERY     = "media_query";
 
 /**
  * Convenience function to read the current state of the attribute's VALUE observable for the given attribute.
