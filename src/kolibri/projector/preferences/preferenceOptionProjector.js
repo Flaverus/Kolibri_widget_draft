@@ -1,23 +1,35 @@
+/**
+ * @module projector/preferences/preferenceOptionProjector
+ *
+ * Following the projector pattern, this module exports the projection function
+ * {@link projectPreferenceOption} that creates preference selection groups
+ * and binds them to the underlying preference option models.
+ */
+
 import { dom } from "../../util/dom.js";
 
 export { projectPreferenceOption };
 
 /**
- * Projector that handles the available options for an accessibility setting.
+ * Projects a preference option as a group of radio buttons inside a collapsible details element.
+ *
+ * @constructor
  * @param { PreferenceOptionControllerType } optionController - Controller for a single option of the setting
  * @param { String } titleLabel - Text used for the summary label (e.g., "Reduced Motion")
  * @param { Array<{value: string, label: string}> } choices - Config array mapping radiobutton input field definitions
- * @returns [HTMLDetailsElement]
+ * @returns { [HTMLDetailsElement] }
+ * @example
  * const [optionNode] = projectPreferenceOption(
- *     PreferenceOptionController('--prefers-contrast', '(prefers-contrast: more)'),
- *     label: "Colorscheme",
- *     choices: [
- *         { value: "system", label: "Use system settings" },
- *         { value: "false",  label: "Light colorscheme" },
- *         { value: "true",   label: "Dark colorscheme" }
- *     ]
- * );
+       PreferenceOptionController('--prefers-contrast', '(prefers-contrast: more)'),
+       "Colorscheme",
+       [
+           { value: "system", label: "Use system settings" },
+           { value: "false",  label: "Light colorscheme" },
+           { value: "true",   label: "Dark colorscheme" }
+       ]
+   );
  */
+
 const projectPreferenceOption = (optionController, titleLabel, choices) => {
     const [detailsElement] = dom(`
         <details>

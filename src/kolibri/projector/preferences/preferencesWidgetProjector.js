@@ -1,15 +1,35 @@
+/**
+ * @module projector/preferences/preferencesWidgetProjector
+ *
+ * Following the projector pattern, this module exports the main projection function
+ * {@link projectWidget} that composes all preference configurations into a singular floating panel.
+ */
+
 import { dom }                     from "../../util/dom.js";
 import { projectPreferenceOption } from "./preferenceOptionProjector.js";
 
 export { projectWidget };
 
 /**
- * Projector that handles rendering the main preferences floating panel shell.
+ * Projects the main preferences widget and composes all preference option projectors into a floating panel.
  * It iterates over a collection of option controllers to append sub-projected DOM elements.
+ *
  * @param { Array<PreferenceOptionControllerType> } optionControllers - List of options to display
- * @param { Array<{name: string, label: string, choices: Array}> } layoutConfigs - Explicit display label mappings matching each controller index
- * @returns [HTMLAsideElement]
+ * @param { Array<{label: string, choices: Array<{value: string, label: string}>}> } layoutConfigs - Explicit display label mappings matching each controller index
+ * @returns { [HTMLAsideElement] }
+ * @example
+ * const controllers = [
+       PreferenceOptionController('--color-scheme', '(prefers-color-scheme: dark)'),
+       PreferenceOptionController('--prefers-contrast', '(prefers-contrast: more)')
+   ];
+   const configs = [
+       { label: "Theme", choices: [{ value: "system", label: "Auto" }, { value: "dark", label: "Dark" }] },
+       { label: "Contrast", choices: [{ value: "system", label: "Auto" }, { value: "true", label: "High" }] }
+   ];
+   const [widgetNode] = projectWidget(controllers, configs);
+   document.body.append(widgetNode);
  */
+
 const projectWidget = (optionControllers, layoutConfigs) => {
     const [widgetElement] = dom(`
         <aside id="preferences-widget" class="floating-box">
