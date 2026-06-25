@@ -25,18 +25,17 @@ export { PreferenceOptionModel }
  * @constructor
  * @param { Object } config - The configuration object for the preference option.
  * @param { !String } config.property - The target CSS Custom Property name (e.g., '--color-scheme'). Serves as the unique qualifier.
- * @param { String } [config.mediaQuery] - Optional native media query string to restrict where this property applies.
+ * @param { String } [config.mediaQuery] - Optional native media query string to be able to check OS and browser settings from the user.
  * @returns PreferenceOptionModelType
  * @example
  * const contrastPreference = PreferenceOptionModel({ property: '--prefers-contrast', mediaQuery: '(prefers-contrast: more)' });
  */
 
 const PreferenceOptionModel = ({property, mediaQuery, value = 'system'}) => {
-    const preferenceAttr = Attribute('system', property);
+    const preferenceAttr = Attribute(value, property);
 
     preferenceAttr.getObs(PROPERTY, property);
     preferenceAttr.getObs(MEDIA_QUERY, mediaQuery);
-    preferenceAttr.getObs(VALUE).setValue(value); // set value explicitly, so it overrides any state the model world has
 
     return {
         getQualifier:     () => preferenceAttr.getQualifier(),
@@ -48,4 +47,3 @@ const PreferenceOptionModel = ({property, mediaQuery, value = 'system'}) => {
                           },
     };
 };
-

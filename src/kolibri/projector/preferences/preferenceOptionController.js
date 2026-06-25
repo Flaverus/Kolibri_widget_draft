@@ -17,16 +17,15 @@ const PreferenceOptionController = (property, mediaQuery) => {
         value: savedPropertyValue
     });
 
-    return {
+    const controller = {
         setValue: newValue => {
             localStorage.setItem(preferenceOptionModel.getPreferenceObs(PROPERTY).getValue(), newValue);
             preferenceOptionModel.getPreferenceObs(VALUE).setValue(newValue);
 
-            const appliedValue = (newValue === 'system' && mediaQueryString !== '')
-                               ? window.matchMedia(mediaQueryString).matches
+            const appliedValue = (newValue === 'system' && mediaQuery !== '')
+                               ? window.matchMedia(mediaQuery).matches
                                : newValue;
 
-            // Special case for reduced motion where a transition is triggered but not on initial page load
             const isPreloading      = document.body.classList.contains('preload');
             const isReducedMotionOn = root.style.getPropertyValue('--prefers-reduced-motion') === 'true' && property !== '--prefers-reduced-motion';
 
@@ -42,6 +41,9 @@ const PreferenceOptionController = (property, mediaQuery) => {
         onValueChanged: preferenceOptionModel.getPreferenceObs(VALUE).onChange,
         getProperty:    preferenceOptionModel.getPreferenceObs(PROPERTY).getValue,
         getMediaQuery:  preferenceOptionModel.getPreferenceObs(MEDIA_QUERY).getValue,
-    }
-};
+    };
 
+    controller.setValue(controller.getValue());
+
+    return controller;
+};
