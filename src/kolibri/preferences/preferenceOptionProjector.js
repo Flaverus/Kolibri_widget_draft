@@ -6,7 +6,7 @@
  * and binds them to the underlying preference option models.
  */
 
-import { dom } from "../../util/dom.js";
+import { dom } from "../util/dom.js";
 
 export { projectPreferenceOption };
 
@@ -21,11 +21,11 @@ export { projectPreferenceOption };
  * @example
  * const [optionNode] = projectPreferenceOption(
        PreferenceOptionController('--prefers-contrast', '(prefers-contrast: more)'),
-       "Colorscheme",
+       'Colorscheme',
        [
-           { value: "system", label: "Use system settings" },
-           { value: "false",  label: "Light colorscheme" },
-           { value: "true",   label: "Dark colorscheme" }
+           { value: 'system', label: 'Use system settings' },
+           { value: 'false',  label: 'Light colorscheme' },
+           { value: 'true',   label: 'Dark colorscheme'}
        ]
    );
  */

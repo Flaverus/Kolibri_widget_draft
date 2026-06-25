@@ -5,7 +5,7 @@
  * {@link projectWidget} that composes all preference configurations into a singular floating panel.
  */
 
-import { dom }                     from "../../util/dom.js";
+import { dom }                     from "../util/dom.js";
 import { projectPreferenceOption } from "./preferenceOptionProjector.js";
 
 export { projectWidget };
@@ -23,8 +23,8 @@ export { projectWidget };
        PreferenceOptionController('--prefers-contrast', '(prefers-contrast: more)')
    ];
    const configs = [
-       { label: "Theme", choices: [{ value: "system", label: "Auto" }, { value: "dark", label: "Dark" }] },
-       { label: "Contrast", choices: [{ value: "system", label: "Auto" }, { value: "true", label: "High" }] }
+       { label: 'Theme', choices: [{ value: 'system', label: 'Auto' }, { value: 'dark', label: 'Dark' }] },
+       { label: 'Contrast', choices: [{ value: 'system', label: 'Auto' }, { value: 'true', label: 'High' }] }
    ];
    const [widgetNode] = projectWidget(controllers, configs);
    document.body.append(widgetNode);

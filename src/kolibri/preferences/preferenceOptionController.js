@@ -2,7 +2,7 @@ import {
     PROPERTY,
     MEDIA_QUERY,
     VALUE
-} from "../../presentationModel.js";
+} from "../presentationModel.js";
 
 import { PreferenceOptionModel } from "./preferenceOptionModel.js";
 

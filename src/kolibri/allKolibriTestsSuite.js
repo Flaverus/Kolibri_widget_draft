@@ -21,6 +21,10 @@ import "./projector/simpleForm/simpleInputControllerTest.js"
 import "./projector/simpleForm/simpleFormControllerTest.js"
 import "./projector/simpleForm/simpleInputProjectorTest.js"
 import "./projector/simpleForm/simpleFormProjectorTest.js"
+import "./preferences/preferenceOptionControllerTest.js";
+import "./preferences/preferenceOptionProjectorTest.js";
+import "./preferences/preferencesWidgetProjectorTest.js";
+
 import "./sequence/sequenceTestSuite.js"
 
 // note: logger tests that need to write to the console are moved to the manual test suite.

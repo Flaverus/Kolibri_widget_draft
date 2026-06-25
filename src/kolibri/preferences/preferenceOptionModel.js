@@ -3,7 +3,7 @@ import {
     PROPERTY,
     MEDIA_QUERY,
     VALUE
-} from "../../presentationModel.js";
+} from "../presentationModel.js";
 
 export { PreferenceOptionModel }
 
@@ -38,12 +38,12 @@ const PreferenceOptionModel = ({property, mediaQuery, value = 'system'}) => {
     preferenceAttr.getObs(MEDIA_QUERY, mediaQuery);
 
     return {
-        getQualifier:     () => preferenceAttr.getQualifier(),
+        getQualifier: () => preferenceAttr.getQualifier(),
         getPreferenceObs: obsType => {
-                              if (!preferenceAttr.hasObs(obsType)) {
-                                  throw new Error(obsType + ' is not defined for preferenceOptionModel.')
-                              }
-                              return preferenceAttr.getObs(obsType)
-                          },
+            if (!preferenceAttr.hasObs(obsType)) {
+                throw new Error(obsType + ' is not defined for preferenceOptionModel.')
+            }
+            return preferenceAttr.getObs(obsType)
+        },
     };
 };

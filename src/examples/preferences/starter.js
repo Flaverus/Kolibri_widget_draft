@@ -1,5 +1,5 @@
-import { PreferenceOptionController } from "../../kolibri/projector/preferences/preferenceOptionController.js";
-import { projectWidget } from "../../kolibri/projector/preferences/preferencesWidgetProjector.js";
+import { PreferenceOptionController } from "../../kolibri/preferences/preferenceOptionController.js";
+import { projectWidget } from "../../kolibri/preferences/preferencesWidgetProjector.js";
 
 // Objects for all settings and their values
 const preferencesBlueprint = [
