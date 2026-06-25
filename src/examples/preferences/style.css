@@ -209,9 +209,10 @@ fieldset {
     }
 }
 
-/* Making sure the transition happens not on the initial page load */
+/* Making sure the transition happens not on the initial page load and prevent flickering while modules are calculating initial properties */
 .preload {
     transition: none !important;
+    visibility: hidden;
 }
 
 /* Animations for transitions that take place whilst reduced-motion is on */
