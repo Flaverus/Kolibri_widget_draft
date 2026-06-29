@@ -40,7 +40,7 @@ const projectPreferenceOption = (optionController, titleLabel, choices) => {
         </details>
     `);
 
-    const fieldset = detailsElement.querySelector('fieldset');
+    const fieldset        = detailsElement.querySelector('fieldset');
     const optionGroupName = optionController.getProperty().replaceAll('-', ''); // Unique group name based on the CSS variable string
 
     choices.forEach(choice => {
