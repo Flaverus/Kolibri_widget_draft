@@ -2,35 +2,41 @@
 @property --bg-color {
     syntax: '<color>';
     inherits: true;
-    initial-value: #fcfcfc;
+    initial-value: limegreen;
 }
 
 @property --text-color {
     syntax: '<color>';
     inherits: true;
-    initial-value: #222222;
+    initial-value: limegreen;
 }
 
 @property --content-bg {
     syntax: '<color>';
     inherits: true;
-    initial-value: #ffffff;
+    initial-value: limegreen;
 }
 
 @property --border-color {
     syntax: '<color>';
     inherits: true;
-    initial-value: #eeeeee;
+    initial-value: limegreen;
 }
 
 @property --primary-accent {
     syntax: '<color>';
     inherits: true;
-    initial-value: #0056b3;
+    initial-value: limegreen;
 }
 
 /* Base Styles */
 body {
+    --bg-color:       #fcfcfc;
+    --text-color:     #222222;
+    --content-bg:     #ffffff;
+    --border-color:   #eeeeee;
+    --primary-accent: #0056b3;
+
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     --border-radius: 0.375rem;
     --z-index-elevated: 1;
